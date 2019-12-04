@@ -1,0 +1,170 @@
+#!/bin/bash
+clear
+
+GREEN="\033[32m"; YELLOW="\033[1;33m"; RED="\033[0;31m"; REDL="\e[101m"; BLINK="\e[5m"; END="\033[0m"
+
+printf $YELLOW
+                                                                             
+printf " _|      _|  _|_|_|_|  _|_|_|_|_|  _|      _|    _|_|      _|_|    _|_|_|  \n"
+printf " _|_|    _|  _|            _|      _|_|    _|  _|    _|  _|    _|  _|    _|\n"
+printf " _|  _|  _|  _|_|_|        _|      _|  _|  _|  _|    _|  _|    _|  _|_|_|  \n"
+printf " _|    _|_|  _|            _|      _|    _|_|  _|    _|  _|    _|  _|    _|\n"
+printf " _|      _|  _|_|_|_|      _|      _|      _|    _|_|      _|_|    _|_|_|  \n"
+printf "\n"
+printf "=============================== NETNOOB 1.0 ===============================\n"
+printf "============================= GITHUB/NARCOTIC =============================\n"
+printf $END
+
+printf "\n"
+
+if [[ $EUID -ne 0 ]]
+ then
+  printf $RED
+  printf $BLINK
+  printf "Run as Root!\n\n"
+  exit
+fi
+
+printf "1. Get Information about your computer and network\n"
+printf "2. Get Information about another computer or a network\n"
+
+printf "\n"
+printf "0. Exit ->\n"
+printf "\n"
+
+read -p "NETNOOB : " sel1
+
+if [ $sel1 = 0 ]
+ then
+  exit
+fi
+
+while [ $sel1 = 1 ]; do
+
+  printf "=========================************=========================\n"
+  
+  printf "\n"
+  printf "1. Your IP & MAC address\n"
+  printf "2. Your Network Statistics\n"
+  printf "3. Your Ethernet Devices\n"
+
+  printf "\n"
+  printf "0. Exit ->\n"
+  printf "\n"
+
+  read -p "NETNOOB : " sel2
+
+  if [ $sel2 = 1 ]
+   then
+    printf $YELLOW
+    arp -e
+    printf "\n"
+    printf $END
+   fi
+
+  if [ $sel2 = 2 ]
+   then
+    printf $YELLOW
+    netstat
+    printf "\n"
+    printf $END
+  fi
+
+  if [ $sel2 = 3 ]
+   then
+    printf $YELLOW    
+    printf "\n"
+    sudo ethtool eth0
+    printf $END
+  fi
+
+  if [ $sel2 = 0 ]
+   then
+     exit
+  fi
+done
+
+if [ $sel1 = 2 ]
+ then
+  read -p "Domain name or IP Address : " webaddr
+fi
+
+while [ $sel1 = 2 ]; do
+  printf "=========================************=========================\n"
+
+  printf "\n"
+  printf "1. IP Address\n"
+  printf "2. Scan all ports\n"
+  printf "3. Scan a specific port\n"
+  printf "4. Scan most common 100 ports\n"
+  printf "5. Find [CNAMES] Alias Domain Names\n"
+  printf "6. Domain Information Groper\n"
+  printf "7. Records\n"
+
+  printf "\n"
+  printf "0. Exit ->\n"
+  printf "\n"
+
+  read -p "NETNOOB : " sel2
+
+  if [ $sel2 = 1 ]
+   then
+    printf $YELLOW
+    sudo host $webaddr
+    printf "\n"
+    printf $END
+   fi
+
+  if [ $sel2 = 2 ]
+   then
+    printf $YELLOW
+    sudo nmap $webaddr
+    printf "\n"
+    printf $END
+  fi
+
+  if [ $sel2 = 3 ]
+   then
+    read -p "Port Number : " port
+    printf $YELLOW
+    sudo nmap -p $port $webaddr 
+    printf "\n"
+    printf $END
+  fi
+
+  if [ $sel2 = 4 ]
+   then
+    printf $YELLOW
+    sudo nmap -F $webaddr 
+    printf "\n"
+    printf $END
+  fi
+
+  if [ $sel2 = 5 ]
+   then
+    printf $YELLOW
+    sudo host -t CNAME $webaddr
+    printf "\n"
+    printf $END
+  fi
+
+  if [ $sel2 = 6 ]
+   then
+    printf $YELLOW
+    sudo dig $webaddr any
+    printf $END
+  fi
+
+  if [ $sel2 = 7 ]
+   then
+    printf $YELLOW
+    sudo whois $webaddr
+    printf $END
+  fi
+
+  if [ $sel2 = 0 ]
+   then
+     exit
+  fi
+done
+
