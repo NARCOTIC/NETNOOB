@@ -3,8 +3,7 @@ clear
 
 GREEN="\033[32m"; YELLOW="\033[1;33m"; RED="\033[0;31m"; REDL="\e[101m"; BLINK="\e[5m"; END="\033[0m"
 
-printf $YELLOW
-                                                                             
+printf $YELLOW                                                                            
 printf " _|      _|  _|_|_|_|  _|_|_|_|_|  _|      _|    _|_|      _|_|    _|_|_|  \n"
 printf " _|_|    _|  _|            _|      _|_|    _|  _|    _|  _|    _|  _|    _|\n"
 printf " _|  _|  _|  _|_|_|        _|      _|  _|  _|  _|    _|  _|    _|  _|_|_|  \n"
@@ -25,8 +24,9 @@ if [[ $EUID -ne 0 ]]
   exit
 fi
 
-printf "1. Get Information about your computer and network\n"
-printf "2. Get Information about another computer or a network\n"
+printf "1. Get information about your computer and network\n"
+printf "2. Get information about another computer or a network\n"
+printf "3. Change your network settings\n"
 
 printf "\n"
 printf "0. Exit ->\n"
@@ -41,7 +41,7 @@ fi
 
 while [ $sel1 = 1 ]; do
 
-  printf "=========================************=========================\n"
+  printf "=========================*==========*=========================\n"
   
   printf "\n"
   printf "1. Your IP & MAC address\n"
@@ -90,9 +90,10 @@ if [ $sel1 = 2 ]
 fi
 
 while [ $sel1 = 2 ]; do
-  printf "=========================************=========================\n"
+  printf "=========================*==========*=========================\n"
 
   printf "\n"
+
   printf "1. IP Address\n"
   printf "2. Scan all ports\n"
   printf "3. Scan a specific port\n"
@@ -168,3 +169,67 @@ while [ $sel1 = 2 ]; do
   fi
 done
 
+if [ $sel1 = 3 ]
+ then
+  printf "\n"
+  printf $REDL
+  printf "Changing network settings might cause problems in connectivity.\n"
+  printf "Do not use this tool without proper understanding!\n" 
+  printf $END
+  printf "\n"
+  read -p "Continue ? [Y/N] : " yesno
+fi
+
+if [[ $yesno = 'y' || $yesno = 'Y' ]]; then
+ while [ $sel1 = 3 ]; do
+   printf "=========================*==========*=========================\n"
+
+   printf "\n"
+
+   printf "1. Change IP address\n"
+   printf "2. Change MAC address\n"
+
+   printf "\n"
+   printf "0. Exit ->\n"
+   printf "\n"
+
+   read -p "NETNOOB : " sel2
+
+   if [ $sel2 = 1 ]
+    then
+     printf $YELLOW
+     # IP CHANGING CODE GOES HERE
+     printf "\n"
+     printf $END
+    fi
+
+   if [ $sel2 = 2 ]
+    then 
+     printf $YELLOW
+     printf "Your current MAC address is : \n\n"
+     arp -e
+     printf "\n"
+     printf $END
+     read -p "Your new MAC address should be, XX:XX:XX:XX:XX:XX : " newmac
+     printf "\n"
+     ifconfig eth0 down
+     macchanger -m $newmac eth0
+     ifconfig eth0 up
+     sleep 2
+     printf $YELLOW
+     printf "\n"
+     printf "Your new MAC address is : $newmac"
+     printf "\n\n"
+     printf $END
+   fi
+
+   if [ $sel2 = 0 ]
+    then
+      exit
+   fi
+ done
+else
+ exit
+fi
+
+#END OF THE PROGRAM
