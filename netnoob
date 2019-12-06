@@ -198,8 +198,22 @@ if [[ $yesno = 'y' || $yesno = 'Y' ]]; then
    if [ $sel2 = 1 ]
     then
      printf $YELLOW
-     # IP CHANGING CODE GOES HERE
+     printf "Your current IP address is : \n\n"
+     arp -e
      printf "\n"
+     printf $END
+     read -p "Your new IP address should be, XXX.XXX.XXX.XXX : " newip
+     read -p "Your new Default Gateway should be, XXX.XXX.XXX.XXX : " newgateway
+     printf "\n"
+     ifconfig eth0 down
+     ifconfig eth0 inet $newip
+     route add default gw $newgateway
+     printf "\n"
+     printf $YELLOW
+     printf "Your IP address has been changed to $newip"
+     printf "\n"
+     printf "Your Default Gateway has been changed to $newgateway"
+     printf "\n\n"
      printf $END
     fi
 
