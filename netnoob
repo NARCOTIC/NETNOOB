@@ -18,19 +18,18 @@ printf "\n"
 
 if [[ $EUID -ne 0 ]]
  then
-  printf $RED
   printf $BLINK
   printf "Run as Root!\n\n"
+  printf $END
   exit
 fi
 
 printf "1. Get information about your computer and network\n"
 printf "2. Get information about another computer or a network\n"
 printf "3. Change your network settings\n"
+printf "4. Vulnerability Assessment Tool\n\n"
 
-printf "\n"
-printf "0. Exit ->\n"
-printf "\n"
+printf "0. Exit ->\n\n"
 
 read -p "NETNOOB : " sel1
 
@@ -180,6 +179,28 @@ if [ $sel1 = 3 ]
   read -p "Continue ? [Y/N] : " yesno
 fi
 
+if [ $sel1 = 4 ]
+ then
+  printf "\n"
+  printf $YELLOW
+  printf "Installing 'VulASS' Vulnerability Assessment Tool\n" 
+  printf $END
+  printf "\n"
+  
+  git clone https://github.com/narcotic/VulASS
+  cd VulASS
+  chmod +x install.sh
+  ./install.sh
+  
+  printf "\n"
+  printf "Use command : vulass to run 'VulASS' Vulnerability Assessment Tool from terminal\n"
+
+  sleep 2
+
+  vulass
+  exit
+fi
+
 if [[ $yesno = 'y' || $yesno = 'Y' ]]; then
  while [ $sel1 = 3 ]; do
    printf "=========================*==========*=========================\n"
@@ -245,5 +266,5 @@ if [[ $yesno = 'y' || $yesno = 'Y' ]]; then
 else
  exit
 fi
-
+exit
 #END OF THE PROGRAM
