@@ -187,17 +187,17 @@ if [ $sel1 = 4 ]
   printf $END
   printf "\n"
   
-  git clone https://github.com/narcotic/VulASS
-  cd VulASS
+  git clone https://github.com/narcotic/Vulnass
+  cd Vulnass
   chmod +x install.sh
   ./install.sh
   
   printf "\n"
-  printf "Use command : vulass to run 'VulASS' Vulnerability Assessment Tool from terminal\n"
+  printf "Use command : vulnass to run Vulnerability Assessment Tool from terminal\n"
 
   sleep 2
 
-  vulass
+  vulnass
   exit
 fi
 
