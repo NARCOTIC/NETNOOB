@@ -27,7 +27,6 @@ fi
 printf "1. Get information about your computer and network\n"
 printf "2. Get information about another computer or a network\n"
 printf "3. Change your network settings\n"
-printf "4. Vulnerability Assessment Tool\n\n"
 
 printf "0. Exit ->\n\n"
 
@@ -177,28 +176,6 @@ if [ $sel1 = 3 ]
   printf $END
   printf "\n"
   read -p "Continue ? [Y/N] : " yesno
-fi
-
-if [ $sel1 = 4 ]
- then
-  printf "\n"
-  printf $YELLOW
-  printf "Installing 'VulASS' Vulnerability Assessment Tool\n" 
-  printf $END
-  printf "\n"
-  
-  git clone https://github.com/narcotic/Vulnass
-  cd Vulnass
-  chmod +x install.sh
-  ./install.sh
-  
-  printf "\n"
-  printf "Use command : vulnass to run Vulnerability Assessment Tool from terminal\n"
-
-  sleep 2
-
-  vulnass
-  exit
 fi
 
 if [[ $yesno = 'y' || $yesno = 'Y' ]]; then
