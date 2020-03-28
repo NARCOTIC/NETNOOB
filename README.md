@@ -10,4 +10,4 @@ __Netnoob is a simple program written in bash that contains basic Linux network 
 
 ⚙️ 4. Install : ```./install.sh```
 
-⚙️ 5. Use command : ```netnoob``` to run it from terminal.
+⚙️ 5. Use command : ```netnoob``` to run it from terminal
