@@ -72,3 +72,4 @@ if [ -f $prgm -a -r $prgm ]; then
 else
   error 1 'File '$prgm' Missing or Inaccessible.'
 fi
+# END OF THE PROGRAM
