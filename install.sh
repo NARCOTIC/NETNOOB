@@ -1,6 +1,6 @@
 #!/bin/sh
-
 clear
+
 prgm='netnoob'
 Yellow="\033[1;33m";
 End="\033[0m"
