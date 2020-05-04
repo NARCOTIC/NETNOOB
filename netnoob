@@ -44,7 +44,7 @@ while [ $sel1 = 1 ]; do
   printf "\n"
   printf "1. Your IP & MAC address\n"
   printf "2. Your Network Statistics\n"
-  printf "3. Your Ethernet Devices\n"
+  printf "3. Your Network Devices\n"
 
   printf "\n"
   printf "0. Exit ->\n"
@@ -72,7 +72,7 @@ while [ $sel1 = 1 ]; do
    then
     printf $YELLOW    
     printf "\n"
-    sudo ethtool eth0
+    sudo ethtool $(route | grep '^default' | grep -o '[^ ]*$')
     printf $END
   fi
 
