@@ -44,7 +44,7 @@ while [ $sel1 = 1 ]; do
   printf "\n"
   printf "1. Your IP & MAC address\n"
   printf "2. Your Network Statistics\n"
-  printf "3. Your Network Devices\n"
+  printf "3. Your Network Interface\n"
 
   printf "\n"
   printf "0. Exit ->\n"
