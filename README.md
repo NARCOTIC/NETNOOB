@@ -1,5 +1,5 @@
 ## 👨🏽‍💻 NETNOOB
-__Netnoob is a simple program written in bash that contains basic Linux network tools as a starting point for new Linux users.__
+__Netnoob is a simple program written in bash that contains basic Linux network tools, information gathering tools and scanning tools.__
 
 ## 👨🏽‍💻 Content
 
