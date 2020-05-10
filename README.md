@@ -3,7 +3,7 @@ __Netnoob is a simple program written in bash that contains basic Linux network 
 
 ## 👨🏽‍💻 Content
 
-	1. Get Information About Your Computer And Network.
+	1. Get Information About Your Computer And Network
 		|--> 1. Your Ip & Mac Address
 		|--> 2. Your Network Statistics
 		|--> 3. Your Network Interface
