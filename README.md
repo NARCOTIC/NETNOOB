@@ -22,10 +22,15 @@ Netnoob is a simple program written in bash that contains basic Linux network to
 		|-- 2. Change Mac Address
 
 ## 👨🏽‍💻 Installing and Using
+
 ⚙️ 1. Clone this repository : ```git clone https://github.com/narcotic/netnoob```
+
 ⚙️ 2. Change directory to netnoob : ```cd netnoob```
+
 ⚙️ 3. Make install.sh executable : ```chmod +x install.sh```
+
 ⚙️ 4. Install : ```./install.sh```
+
 ⚙️ 5. Use command : ```netnoob``` to run it from terminal
 
 ## 👨🏽‍💻 Test Run
