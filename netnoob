@@ -10,7 +10,7 @@ printf " _|  _|  _|  _|_|_|        _|      _|  _|  _|  _|    _|  _|    _|  _|_|_
 printf " _|    _|_|  _|            _|      _|    _|_|  _|    _|  _|    _|  _|    _|\n"
 printf " _|      _|  _|_|_|_|      _|      _|      _|    _|_|      _|_|    _|_|_|  \n"
 printf "\n"
-printf "=============================== NETNOOB 1.0 ===============================\n"
+printf "============================== NETNOOB--2018 ==============================\n"
 printf "============================= GITHUB/NARCOTIC =============================\n"
 printf $END
 
@@ -18,17 +18,19 @@ printf "\n"
 
 if [[ $EUID -ne 0 ]]
  then
+  printf $RED
   printf $BLINK
-  printf "Run as Root!\n\n"
-  printf $END
-  exit
+  printf "Running as Root!\n\n"
+  sudo netnoob
 fi
 
 printf "1. Get information about your computer and network\n"
 printf "2. Get information about another computer or a network\n"
 printf "3. Change your network settings\n"
 
-printf "0. Exit ->\n\n"
+printf "\n"
+printf "0. Exit ->\n"
+printf "\n"
 
 read -p "NETNOOB : " sel1
 
@@ -44,7 +46,7 @@ while [ $sel1 = 1 ]; do
   printf "\n"
   printf "1. Your IP & MAC address\n"
   printf "2. Your Network Statistics\n"
-  printf "3. Your Network Interface\n"
+  printf "3. Your Ethernet Devices\n"
 
   printf "\n"
   printf "0. Exit ->\n"
@@ -72,7 +74,7 @@ while [ $sel1 = 1 ]; do
    then
     printf $YELLOW    
     printf "\n"
-    sudo ethtool $(route | grep '^default' | grep -o '[^ ]*$')
+    sudo ethtool eth0
     printf $END
   fi
 
@@ -186,6 +188,7 @@ if [[ $yesno = 'y' || $yesno = 'Y' ]]; then
 
    printf "1. Change IP address\n"
    printf "2. Change MAC address\n"
+   printf "3. Mount a Networked Drive\n"
 
    printf "\n"
    printf "0. Exit ->\n"
@@ -235,6 +238,23 @@ if [[ $yesno = 'y' || $yesno = 'Y' ]]; then
      printf $END
    fi
 
+   if [ $sel2 = 3 ]
+    then 
+     read -p "Give a Name for the Mount Folder : " mountname
+     read -p "Path of the Networked Drive (//192.168.1.10/nas/files) : " naspath
+     read -p "Login Username : " username   
+     printf "Mounting...\n"
+     sleep 2
+     cd ~/Desktop
+     mkdir $mountname
+     sudo mount.cifs $naspath ~/Desktop/$mountname -o user=$username
+     printf $YELLOW
+     printf "\n"
+     printf "Your Networked Drive is Mounted at /Desktop/$mountname"
+     printf "\n\n"
+     printf $END
+   fi
+
    if [ $sel2 = 0 ]
     then
       exit
@@ -243,5 +263,5 @@ if [[ $yesno = 'y' || $yesno = 'Y' ]]; then
 else
  exit
 fi
-exit
-# END OF THE PROGRAM
+
+#END OF THE PROGRAM
