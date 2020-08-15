@@ -21,6 +21,8 @@ if [[ $EUID -ne 0 ]]
   printf $RED
   printf $BLINK
   printf "Running as Root!\n\n"
+  $END
+  sleep 2
   sudo netnoob
 fi
 
