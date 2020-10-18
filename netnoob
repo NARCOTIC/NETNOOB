@@ -28,7 +28,7 @@ fi
 
 printf "1. Get information about your computer and network\n"
 printf "2. Get information about another computer or a network\n"
-printf "3. Change your network settings\n"
+printf "3. Network Settings and Shared Drives\n"
 
 printf "\n"
 printf "0. Exit ->\n"
@@ -190,7 +190,8 @@ if [[ $yesno = 'y' || $yesno = 'Y' ]]; then
 
    printf "1. Change IP address\n"
    printf "2. Change MAC address\n"
-   printf "3. Mount a Networked Drive\n"
+   printf "3. Create a Networked Drive\n"
+   printf "4. Mount a Networked Drive\n"
 
    printf "\n"
    printf "0. Exit ->\n"
@@ -242,6 +243,42 @@ if [[ $yesno = 'y' || $yesno = 'Y' ]]; then
 
    if [ $sel2 = 3 ]
     then 
+     printf $YELLOW
+     printf "Installing Samba...\n\n"
+     printf $END
+     sudo apt-get install samba
+     printf "\n"
+     printf $YELLOW
+     printf "Done...\n\n"
+     printf $END
+     read -p "Your Current Username : " uid
+     read -p "Share Name : " folder
+     printf "\n"
+     printf $YELLOW
+     printf "Creating Share '$folder'...\n"
+     printf $END
+     mkdir /home/$uid/$folder
+     printf "Location : /home/$uid/$folder\n\n"
+     sudo smbpasswd -a $uid
+     printf "\n"
+     printf $YELLOW
+     printf "Appending Changes to /etc/samba/smb.conf...\n"
+     printf $END
+     sudo bash -c "echo [$folder] >> /etc/samba/smb.conf"
+     sudo bash -c "echo path = /home/$uid/$folder >> /etc/samba/smb.conf"
+     sudo bash -c "echo valid users = $uid >> /etc/samba/smb.conf"
+     sudo bash -c "echo read only = no >> /etc/samba/smb.conf"
+     printf $YELLOW
+     printf "Restarting Samba...\n"
+     printf $END
+     sudo service smbd restart
+     printf $YELLOW
+     printf "Done...\n"
+     printf $END
+   fi
+
+   if [ $sel2 = 4 ]
+    then 
      read -p "Give a Name for the Mount Folder : " mountname
      read -p "Path of the Networked Drive (//192.168.1.10/nas/files) : " naspath
      read -p "Login Username : " username   
@@ -255,7 +292,7 @@ if [[ $yesno = 'y' || $yesno = 'Y' ]]; then
      printf "Your Networked Drive is Mounted at /Desktop/$mountname"
      printf "\n\n"
      printf $END
-   fi
+   fi   
 
    if [ $sel2 = 0 ]
     then
